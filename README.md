@@ -195,4 +195,18 @@ wn-1   Ready      <none>          2m44s   v1.29.8
 wn-2   Ready      <none>          41s     v1.29.8
 ~~~
 As Observed the above Output, Roles for worker nodes are showing none, Lets change it.
-
+~~~bash
+kubectl label nodes <node_name> node-role.kubernetes.io/worker=true
+~~~
+~~~bash
+kubectl label nodes wn-1 node-role.kubernetes.io/worker=true
+kubectl label nodes wn-2 node-role.kubernetes.io/worker=true
+~~~
+Verify the Node Roles.
+~~~
+root@CP-1:~# kubectl get nodes
+NAME   STATUS   ROLES           AGE    VERSION
+cp-1   Ready    control-plane   10h    v1.29.8
+wn-1   Ready    worker          103m   v1.29.8
+wn-2   Ready    worker          101m   v1.29.8
+~~~
