@@ -177,6 +177,7 @@ cp-1   Ready    control-plane   8h    v1.29.8
 **Note:-** As we add only one control plane, its showing one and we didn't add any workernodes.
 ### Adding Worker Nodes to the Cluster
 Execute the `kubead join` command on Worker Nodes to join with the cluster.
+- Token will be generated while initiatizing `kubeadm` on control plane.
 ~~~bash
 kubeadm join 172.16.10.69:6443 --token er69y8.jliqf9p297ch7xpa \
         --discovery-token-ca-cert-hash sha256:1b80055e184f4b75e275145bfc7849c22b8cd1eab0d12946ce81f4147d07e8e7
