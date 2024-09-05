@@ -59,7 +59,7 @@ sudo apt-mark hold kubelet kubeadm kubectl
 ### Creating a cluster with kubeadm
 Initializing your control-plane node #can be perform on Cntrol Plane only.
 ~~~bash
-kubeadm init --pod-network-cidr=192.168.0.0/16 --apiserver-advertise-address=192.168.100.10
+kubeadm init
 ~~~
 **OutPut looks like below**
 ~~~bash
