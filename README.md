@@ -151,7 +151,7 @@ Verify with below Command
 ~~~bash
 kubectl get pods -n kube-system
 ~~~
-OutPut
+**OutPut**
 ~~~bash
 NAME                                      READY   STATUS     RESTARTS   AGE
 calico-kube-controllers-97d84d657-hhtzc   0/1     Pending    0          2m24s
@@ -168,9 +168,24 @@ List the Nodes
 ~~~bash
 kubectl get nodes
 ~~~
-OutPut
+**OutPut**
 ~~~txt
 root@CP-1:~# kubectl get nodes
 NAME   STATUS   ROLES           AGE   VERSION
 cp-1   Ready    control-plane   8h    v1.29.8
+~~~
+**Note:-** As we add only one control plane, its showing one and we didn't add any workernodes.
+### Adding Worker Nodes to the Cluster
+Execute the `kubead join` command on Worker Nodes to join with the cluster.
+~~~bash
+kubeadm join 172.16.10.69:6443 --token er69y8.jliqf9p297ch7xpa \
+        --discovery-token-ca-cert-hash sha256:1b80055e184f4b75e275145bfc7849c22b8cd1eab0d12946ce81f4147d07e8e7
+~~~
+Verify the `Nodes` on `Control Plane`
+~~~bash
+root@CP-1:~# kubectl get nodes
+NAME   STATUS     ROLES           AGE     VERSION
+cp-1   Ready      control-plane   8h      v1.29.8
+wn-1   Ready      Worker1         2m44s   v1.29.8
+wn-2   Ready      Worker2         41s     v1.29.8
 ~~~
