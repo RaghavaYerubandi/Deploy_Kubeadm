@@ -96,4 +96,81 @@ If you are the `root` user, you can run
 export KUBECONFIG=/etc/kubernetes/admin.conf
 ~~~
 ### Installing a Pod network add-on
-- https://kubernetes.io/docs/concepts/cluster-administration/networking/#how-to-implement-the-kubernetes-network-model
+- You must deploy a Container Network Interface (CNI) based Pod network add-on so that your Pods can communicate with each other. 
+- Cluster DNS (CoreDNS) will not start up before a network is installed.
+Below are the list of some available add-ons for CNI.
+- Antrea
+- Calico
+- Flannel
+- Cilium
+- Canal
+- Knitter
+- NSX-T
+- Weave Net
+### Installing CNI `Calico` add-on
+Download the Calico
+~~~bash
+curl https://raw.githubusercontent.com/projectcalico/calico/v3.28.1/manifests/calico.yaml -O
+~~~
+~~~bash
+kubectl apply -f calico.yaml
+~~~
+OutPut Looks Like
+~~~bash
+poddisruptionbudget.policy/calico-kube-controllers created
+serviceaccount/calico-kube-controllers created
+serviceaccount/calico-node created
+serviceaccount/calico-cni-plugin created
+configmap/calico-config created
+customresourcedefinition.apiextensions.k8s.io/bgpconfigurations.crd.projectcalico.org created
+customresourcedefinition.apiextensions.k8s.io/bgpfilters.crd.projectcalico.org created
+customresourcedefinition.apiextensions.k8s.io/bgppeers.crd.projectcalico.org created
+customresourcedefinition.apiextensions.k8s.io/blockaffinities.crd.projectcalico.org created
+customresourcedefinition.apiextensions.k8s.io/caliconodestatuses.crd.projectcalico.org created
+customresourcedefinition.apiextensions.k8s.io/clusterinformations.crd.projectcalico.org created
+customresourcedefinition.apiextensions.k8s.io/felixconfigurations.crd.projectcalico.org created
+customresourcedefinition.apiextensions.k8s.io/globalnetworkpolicies.crd.projectcalico.org created
+customresourcedefinition.apiextensions.k8s.io/globalnetworksets.crd.projectcalico.org created
+customresourcedefinition.apiextensions.k8s.io/hostendpoints.crd.projectcalico.org created
+customresourcedefinition.apiextensions.k8s.io/ipamblocks.crd.projectcalico.org created
+customresourcedefinition.apiextensions.k8s.io/ipamconfigs.crd.projectcalico.org created
+customresourcedefinition.apiextensions.k8s.io/ipamhandles.crd.projectcalico.org created
+customresourcedefinition.apiextensions.k8s.io/ippools.crd.projectcalico.org created
+customresourcedefinition.apiextensions.k8s.io/ipreservations.crd.projectcalico.org created
+customresourcedefinition.apiextensions.k8s.io/kubecontrollersconfigurations.crd.projectcalico.org created
+customresourcedefinition.apiextensions.k8s.io/networkpolicies.crd.projectcalico.org created
+customresourcedefinition.apiextensions.k8s.io/networksets.crd.projectcalico.org created
+clusterrole.rbac.authorization.k8s.io/calico-kube-controllers created
+clusterrole.rbac.authorization.k8s.io/calico-node created
+clusterrole.rbac.authorization.k8s.io/calico-cni-plugin created
+clusterrolebinding.rbac.authorization.k8s.io/calico-kube-controllers created
+clusterrolebinding.rbac.authorization.k8s.io/calico-node created
+clusterrolebinding.rbac.authorization.k8s.io/calico-cni-plugin created
+~~~
+Verify with below Command
+~~~bash
+kubectl get pods -n kube-system
+~~~
+OutPut
+~~~bash
+NAME                                      READY   STATUS     RESTARTS   AGE
+calico-kube-controllers-97d84d657-hhtzc   0/1     Pending    0          2m24s
+calico-node-dmzrj                         0/1     Init:0/3   0          2m24s
+coredns-76f75df574-4mvqt                  0/1     Pending    0          8h
+coredns-76f75df574-nt8nh                  0/1     Pending    0          8h
+etcd-cp-1                                 1/1     Running    5          8h
+kube-apiserver-cp-1                       1/1     Running    5          8h
+kube-controller-manager-cp-1              1/1     Running    5          8h
+kube-proxy-pvqw9                          1/1     Running    0          8h
+kube-scheduler-cp-1                       1/1     Running    7          8h
+~~~
+List the Nodes
+~~~bash
+kubectl get nodes
+~~~
+OutPut
+~~~txt
+root@CP-1:~# kubectl get nodes
+NAME   STATUS   ROLES           AGE   VERSION
+cp-1   Ready    control-plane   8h    v1.29.8
+~~~
