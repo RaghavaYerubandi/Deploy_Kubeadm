@@ -84,5 +84,16 @@ Then you can join any number of worker nodes by running the following on each as
 kubeadm join 172.16.10.69:6443 --token er69y8.jliqf9p297ch7xpa \
         --discovery-token-ca-cert-hash sha256:1b80055e184f4b75e275145bfc7849c22b8cd1eab0d12946ce81f4147d07e8e7
 root@CP-1:~#
-
 ~~~
+To make kubectl work for your `non-root` user, run these commands
+~~~bash
+mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+~~~
+If you are the `root` user, you can run
+~~~bash
+export KUBECONFIG=/etc/kubernetes/admin.conf
+~~~
+### Installing a Pod network add-on
+- https://kubernetes.io/docs/concepts/cluster-administration/networking/#how-to-implement-the-kubernetes-network-model
