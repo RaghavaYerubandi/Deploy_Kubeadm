@@ -153,16 +153,21 @@ kubectl get pods -n kube-system
 ~~~
 **OutPut should look something like:**
 ~~~bash
-NAME                                      READY   STATUS     RESTARTS   AGE
-calico-kube-controllers-97d84d657-hhtzc   0/1     Pending    0          2m24s
-calico-node-dmzrj                         0/1     Init:0/3   0          2m24s
-coredns-76f75df574-4mvqt                  0/1     Pending    0          8h
-coredns-76f75df574-nt8nh                  0/1     Pending    0          8h
-etcd-cp-1                                 1/1     Running    5          8h
-kube-apiserver-cp-1                       1/1     Running    5          8h
-kube-controller-manager-cp-1              1/1     Running    5          8h
-kube-proxy-pvqw9                          1/1     Running    0          8h
-kube-scheduler-cp-1                       1/1     Running    7          8h
+root@CP-1:~# kubectl get pods -n kube-system
+NAME                                      READY   STATUS    RESTARTS   AGE
+calico-kube-controllers-97d84d657-hhtzc   1/1     Running   0          116m
+calico-node-4wfnt                         1/1     Running   0          107m
+calico-node-dmzrj                         1/1     Running   0          116m
+calico-node-j2cwb                         1/1     Running   0          104m
+coredns-76f75df574-4mvqt                  1/1     Running   0          10h
+coredns-76f75df574-nt8nh                  1/1     Running   0          10h
+etcd-cp-1                                 1/1     Running   5          10h
+kube-apiserver-cp-1                       1/1     Running   5          10h
+kube-controller-manager-cp-1              1/1     Running   5          10h
+kube-proxy-7nmm9                          1/1     Running   0          107m
+kube-proxy-g57g9                          1/1     Running   0          104m
+kube-proxy-pvqw9                          1/1     Running   0          10h
+kube-scheduler-cp-1                       1/1     Running   7          10h
 ~~~
 List the Nodes
 ~~~bash
