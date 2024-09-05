@@ -115,7 +115,7 @@ curl https://raw.githubusercontent.com/projectcalico/calico/v3.28.1/manifests/ca
 ~~~bash
 kubectl apply -f calico.yaml
 ~~~
-OutPut Looks Like
+**OutPut should look something like:**
 ~~~bash
 poddisruptionbudget.policy/calico-kube-controllers created
 serviceaccount/calico-kube-controllers created
@@ -151,7 +151,7 @@ Verify with below Command
 ~~~bash
 kubectl get pods -n kube-system
 ~~~
-**OutPut**
+**OutPut should look something like:**
 ~~~bash
 NAME                                      READY   STATUS     RESTARTS   AGE
 calico-kube-controllers-97d84d657-hhtzc   0/1     Pending    0          2m24s
@@ -168,7 +168,7 @@ List the Nodes
 ~~~bash
 kubectl get nodes
 ~~~
-**OutPut**
+**OutPut should look something like:**
 ~~~txt
 root@CP-1:~# kubectl get nodes
 NAME   STATUS   ROLES           AGE   VERSION
@@ -184,9 +184,15 @@ kubeadm join 172.16.10.69:6443 --token er69y8.jliqf9p297ch7xpa \
 ~~~
 Verify the `Nodes` on `Control Plane`
 ~~~bash
+kubectl get nodes
+~~~
+**OutPut should look something like:**
+~~~bash
 root@CP-1:~# kubectl get nodes
 NAME   STATUS     ROLES           AGE     VERSION
 cp-1   Ready      control-plane   8h      v1.29.8
-wn-1   Ready      Worker1         2m44s   v1.29.8
-wn-2   Ready      Worker2         41s     v1.29.8
+wn-1   Ready      <none>          2m44s   v1.29.8
+wn-2   Ready      <none>          41s     v1.29.8
 ~~~
+As Observed the above Output, Roles for worker nodes are showing none, Lets change it.
+
