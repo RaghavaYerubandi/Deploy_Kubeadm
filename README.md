@@ -215,3 +215,21 @@ cp-1   Ready    control-plane   10h    v1.29.8
 wn-1   Ready    worker          103m   v1.29.8
 wn-2   Ready    worker          101m   v1.29.8
 ~~~
+### Deploying an Application
+- Deploy an nginx sample web application on k8s.
+~~~bash
+kubectl create deployment app1 --image nginx:latest --replicas 3
+~~~
+- The above will create a deployment using nginx image with replicas of 3.
+Verify the POD status
+~~~bash
+kubectl get pods
+~~~
+**OutPut should look something like:**
+~~~bash
+root@CP-1:~# kubectl get pods
+NAME                    READY   STATUS    RESTARTS   AGE
+app1-6cf7b4979b-kpzxg   1/1     Running   0          4m46s
+app1-6cf7b4979b-ntpd2   1/1     Running   0          4m46s
+app1-6cf7b4979b-plksm   1/1     Running   0          4m46s
+~~~
