@@ -61,4 +61,28 @@ Initializing your control-plane node #can be perform on Cntrol Plane only.
 ~~~bash
 kubeadm init --pod-network-cidr=192.168.0.0/16 --apiserver-advertise-address=192.168.100.10
 ~~~
-**OutPut**
+**OutPut looks like below**
+~~~bash
+Your Kubernetes control-plane has initialized successfully!
+
+To start using your cluster, you need to run the following as a regular user:
+
+  mkdir -p $HOME/.kube
+  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+  sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+Alternatively, if you are the root user, you can run:
+
+  export KUBECONFIG=/etc/kubernetes/admin.conf
+
+You should now deploy a pod network to the cluster.
+Run "kubectl apply -f [podnetwork].yaml" with one of the options listed at:
+  https://kubernetes.io/docs/concepts/cluster-administration/addons/
+
+Then you can join any number of worker nodes by running the following on each as root:
+
+kubeadm join 172.16.10.69:6443 --token er69y8.jliqf9p297ch7xpa \
+        --discovery-token-ca-cert-hash sha256:1b80055e184f4b75e275145bfc7849c22b8cd1eab0d12946ce81f4147d07e8e7
+root@CP-1:~#
+
+~~~
