@@ -15,16 +15,8 @@ When running Kubernetes in an environment with strict network boundaries, such a
 
 ![image](https://github.com/user-attachments/assets/ddd6b772-0858-4fd9-897f-9cadf196927d)
 
-Protocol	Direction	Port Range	Purpose	Used By
-TCP	Inbound	6443	Kubernetes API server	All
-TCP	Inbound	2379-2380	etcd server client API	kube-apiserver, etcd
-TCP	Inbound	10250	Kubelet API	Self, Control plane
-TCP	Inbound	10259	kube-scheduler	Self
-TCP	Inbound	10257	kube-controller-manager	Self
-![image](https://github.com/user-attachments/assets/d395ab02-1a00-43c7-ba1f-fee79cc88b0e)
 
-
-![image](https://github.com/user-attachments/assets/27d634fe-dafe-423f-a096-7a277ca60c34)
+ ![image](https://github.com/user-attachments/assets/27d634fe-dafe-423f-a096-7a277ca60c34)
 
 
 ### Setup Steps
@@ -44,7 +36,7 @@ apt update
 ~~~bash
 apt install docker.io -y
 ~~~
-Once docker installed, Verify with using
+Once docker installed, Verify it.
 ~~~bash
 docker --version
 ~~~
