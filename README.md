@@ -13,21 +13,11 @@
 ### Ports and Protocols
 When running Kubernetes in an environment with strict network boundaries, such as on-premises datacenter with physical network firewalls or Virtual Networks in Public Cloud, it is useful to be aware of the ports and protocols used by Kubernetes components
 **Control plane**
-~~~
-Protocol	Direction	Port Range	Purpose	                Used By
-TCP	        Inbound	    6443	    Kubernetes API server	All
-TCP	        Inbound	    2379-2380	etcd server client API	kube-apiserver, etcd
-TCP	        Inbound	    10250	    Kubelet API	            Self, Control plane
-TCP	        Inbound	    10259	    kube-scheduler	        Self
-TCP	        Inbound	    10257	    kube-controller-manager	Self
-~~~
+![image](https://github.com/user-attachments/assets/eb465f68-fd2a-4e63-a961-d4fcc3283474)
+
 **Worker node(s)**
-~~~
-Protocol	Direction	Port Range	   Purpose	               Used By
-TCP	        Inbound	    10250	       Kubelet API	           Self, Control plane
-TCP	        Inbound	    10256	       kube-proxy	           Self, Load balancers
-TCP	        Inbound	    30000-32767	   NodePort Services†	   All
-~~~
+![image](https://github.com/user-attachments/assets/3ba2fe62-b2ec-4263-a8a3-5cee4e20f046)
+
 ### Setup Steps
 - [Installing Continer runtime [Docker]. ](https://github.com/RaghavaYerubandi/Deploy_Kubeadm/blob/main/README.md#installing-container-runtime-docker)
 - [Install `KUBEADM`,`KUBELET`,`KUBECTL`.](https://github.com/RaghavaYerubandi/Deploy_Kubeadm/blob/main/README.md#installation-of-kubeadm-kubelet--kubectl)
