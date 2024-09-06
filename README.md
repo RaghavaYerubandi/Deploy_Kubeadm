@@ -14,27 +14,27 @@
 When running Kubernetes in an environment with strict network boundaries, such as on-premises datacenter with physical network firewalls or Virtual Networks in Public Cloud, it is useful to be aware of the ports and protocols used by Kubernetes components
 **Control plane**
 ~~~
-Protocol	Direction	Port Range	Purpose	                 Used By
-TCP	      Inbound	  6443	      Kubernetes API server	   All
-TCP	      Inbound	  2379-2380	  etcd server client API	 kube-apiserver, etcd
-TCP	      Inbound	  10250	      Kubelet API	             Self, Control plane
-TCP	      Inbound	  10259	      kube-scheduler	         Self
-TCP	      Inbound	  10257	      kube-controller-manager	 Self
+Protocol	Direction	Port Range	  Purpose	                 Used By
+TCP	        Inbound	    6443	      Kubernetes API server	     All
+TCP	        Inbound	    2379-2380	  etcd server client API	 kube-apiserver, etcd
+TCP	        Inbound	    10250	      Kubelet API	             Self, Control plane
+TCP	        Inbound	    10259	      kube-scheduler	         Self
+TCP	        Inbound	    10257	      kube-controller-manager	 Self
 ~~~
 **Worker node(s)**
 ~~~
-Protocol	Direction	Port Range	 Purpose	               Used By
-TCP	      Inbound	  10250	       Kubelet API	           Self, Control plane
-TCP	      Inbound	  10256	       kube-proxy	             Self, Load balancers
-TCP	      Inbound	  30000-32767	 NodePort Services†	     All
+Protocol	Direction	Port Range	   Purpose	               Used By
+TCP	        Inbound	    10250	       Kubelet API	           Self, Control plane
+TCP	        Inbound	    10256	       kube-proxy	           Self, Load balancers
+TCP	        Inbound	    30000-32767	   NodePort Services†	   All
 ~~~
 ### Setup Steps
-- Installing Continer runtime [Docker]. 
-- Install `KUBEADM`,`KUBELET`,`KUBECTL`.
-- Initialize Control Plane.
-- Install POD-Network Add-on [CNI].
-- Join Worker Nodes.
-- Deploying an Application [Nginx].
+- [Installing Continer runtime [Docker]. ](https://github.com/RaghavaYerubandi/Deploy_Kubeadm/blob/main/README.md#installing-container-runtime-docker)
+- [Install `KUBEADM`,`KUBELET`,`KUBECTL`.](https://github.com/RaghavaYerubandi/Deploy_Kubeadm/blob/main/README.md#installation-of-kubeadm-kubelet--kubectl)
+- [Initialize Control Plane.](https://github.com/RaghavaYerubandi/Deploy_Kubeadm/blob/main/README.md#initialize-control-plane)
+- [Install POD-Network Add-on [CNI].](https://github.com/RaghavaYerubandi/Deploy_Kubeadm/blob/main/README.md#installing-a-pod-network-add-on)
+- [Join Worker Nodes.](https://github.com/RaghavaYerubandi/Deploy_Kubeadm/blob/main/README.md#adding-worker-nodes-to-the-cluster)
+- [Deploying an Application [Nginx].](https://github.com/RaghavaYerubandi/Deploy_Kubeadm/blob/main/README.md#adding-worker-nodes-to-the-cluster)
 ### Installing Container runtime [Docker]
 - Install Docker on Control Plane & Worker Nodes
 ~~~bash
