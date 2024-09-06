@@ -12,13 +12,12 @@
 
 ### Ports and Protocols
 When running Kubernetes in an environment with strict network boundaries, such as on-premises datacenter with physical network firewalls or Virtual Networks in Public Cloud, it is useful to be aware of the ports and protocols used by Kubernetes components.
-**Control plane**
 
-![image](https://github.com/user-attachments/assets/eb465f68-fd2a-4e63-a961-d4fcc3283474)
+![image](https://github.com/user-attachments/assets/ddd6b772-0858-4fd9-897f-9cadf196927d)
 
-**Worker node(s)**
 
-![image](https://github.com/user-attachments/assets/3ba2fe62-b2ec-4263-a8a3-5cee4e20f046)
+![image](https://github.com/user-attachments/assets/27d634fe-dafe-423f-a096-7a277ca60c34)
+
 
 ### Setup Steps
 
