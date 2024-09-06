@@ -11,20 +11,24 @@
 ## Preparing the hosts
 
 ### Ports and Protocols
-When running Kubernetes in an environment with strict network boundaries, such as on-premises datacenter with physical network firewalls or Virtual Networks in Public Cloud, it is useful to be aware of the ports and protocols used by Kubernetes components
+When running Kubernetes in an environment with strict network boundaries, such as on-premises datacenter with physical network firewalls or Virtual Networks in Public Cloud, it is useful to be aware of the ports and protocols used by Kubernetes components.
 **Control plane**
+
 ![image](https://github.com/user-attachments/assets/eb465f68-fd2a-4e63-a961-d4fcc3283474)
 
 **Worker node(s)**
+
 ![image](https://github.com/user-attachments/assets/3ba2fe62-b2ec-4263-a8a3-5cee4e20f046)
 
 ### Setup Steps
+
 - [Installing Continer runtime [Docker]. ](https://github.com/RaghavaYerubandi/Deploy_Kubeadm/blob/main/README.md#installing-container-runtime-docker)
 - [Install `KUBEADM`,`KUBELET`,`KUBECTL`.](https://github.com/RaghavaYerubandi/Deploy_Kubeadm/blob/main/README.md#installation-of-kubeadm-kubelet--kubectl)
 - [Initialize Control Plane.](https://github.com/RaghavaYerubandi/Deploy_Kubeadm/blob/main/README.md#initialize-control-plane)
 - [Install POD-Network Add-on [CNI].](https://github.com/RaghavaYerubandi/Deploy_Kubeadm/blob/main/README.md#installing-a-pod-network-add-on)
 - [Join Worker Nodes.](https://github.com/RaghavaYerubandi/Deploy_Kubeadm/blob/main/README.md#adding-worker-nodes-to-the-cluster)
 - [Deploying an Application [Nginx].](https://github.com/RaghavaYerubandi/Deploy_Kubeadm/blob/main/README.md#adding-worker-nodes-to-the-cluster)
+
 ### Installing Container runtime [Docker]
 - Install Docker on Control Plane & Worker Nodes
 ~~~bash
@@ -37,11 +41,13 @@ Once docker installed, Verify with using
 ~~~bash
 docker --version
 ~~~
+
 **OutPut looks like**
 ~~~bash
 root@CP-1:~# docker --version
 Docker version 24.0.7, build 24.0.7-0ubuntu2~20.04.1
 ~~~
+
 ### Installation of `kubeadm`, `kubelet` & `kubectl`.
 - `kubeadm`: the command to bootstrap the cluster.
 - `kubelet`: the component that runs on all of the machines in your cluster and does things like starting pods and containers.
@@ -73,11 +79,13 @@ sudo apt-get update
 sudo apt-get install -y kubelet kubeadm kubectl
 sudo apt-mark hold kubelet kubeadm kubectl
 ~~~
+
 ### Initialize Control Plane
 Initializing your control-plane node [Can be perform on Control Plane only]
 ~~~bash
 kubeadm init
 ~~~
+
 **OutPut should look something like**
 ~~~bash
 Your Kubernetes control-plane has initialized successfully!
@@ -114,6 +122,7 @@ If you are the `root` user, you can run
 ~~~bash
 export KUBECONFIG=/etc/kubernetes/admin.conf
 ~~~
+
 ### Installing a Pod network add-on
 - Run it on Control Plane only.
 - You must deploy a Container Network Interface (CNI) based Pod network add-on so that your Pods can communicate with each other. 
@@ -127,6 +136,7 @@ Below are the list of some available add-ons for CNI.
 - Knitter
 - NSX-T
 - Weave Net
+
 ### Installing CNI `Calico` add-on
 Download the Calico
 ~~~bash
@@ -135,6 +145,7 @@ curl https://raw.githubusercontent.com/projectcalico/calico/v3.28.1/manifests/ca
 ~~~bash
 kubectl apply -f calico.yaml
 ~~~
+
 **OutPut should look something like:**
 ~~~bash
 poddisruptionbudget.policy/calico-kube-controllers created
@@ -171,6 +182,7 @@ Verify with below Command
 ~~~bash
 kubectl get pods -n kube-system
 ~~~
+
 **OutPut should look something like:**
 ~~~bash
 root@CP-1:~# kubectl get pods -n kube-system
@@ -193,12 +205,14 @@ List the Nodes
 ~~~bash
 kubectl get nodes
 ~~~
+
 **OutPut should look something like:**
 ~~~txt
 root@CP-1:~# kubectl get nodes
 NAME   STATUS   ROLES           AGE   VERSION
 cp-1   Ready    control-plane   8h    v1.29.8
 ~~~
+
 **Note:-** As we add only one control plane, its showing only one and we didn't add any workernodes.
 
 ### Adding Worker Nodes to the Cluster
@@ -217,6 +231,7 @@ or
 ~~~bash
 kubectl get nodes -o wide
 ~~~
+
 **OutPut should look something like:**
 ~~~bash
 root@CP-1:~# kubectl get nodes
@@ -241,6 +256,7 @@ cp-1   Ready    control-plane   10h    v1.29.8
 wn-1   Ready    worker          103m   v1.29.8
 wn-2   Ready    worker          101m   v1.29.8
 ~~~
+
 ### Deploying an Application
 - Deploy an nginx sample web application on k8s.
 ~~~bash
@@ -251,6 +267,7 @@ Verify the POD status
 ~~~bash
 kubectl get pods
 ~~~
+
 **OutPut should look something like:**
 ~~~bash
 root@CP-1:~# kubectl get pods
@@ -259,4 +276,5 @@ app1-6cf7b4979b-kpzxg   1/1     Running   0          4m46s
 app1-6cf7b4979b-ntpd2   1/1     Running   0          4m46s
 app1-6cf7b4979b-plksm   1/1     Running   0          4m46s
 ~~~
+
 # Thank You
