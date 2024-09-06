@@ -1,17 +1,42 @@
 # Deploy_Kubeadm
 
-### Steps to setup kubeadm cluster in an `onprem-setup`
+### Steps to setup `kubeadm cluster`
 
 **Pre-requisites**
-- We took a 3 node cluster, one is ControlPlane and 2 Worker Nodes to setup the `kubeadm_cluster`.
-- Min 2 Cpu & 2GB Memory.
-- Network connectivity among all machines in the cluster
+- 3 Virtual Instances, one is acting as `Control Plane` & 2 are `worker nodes`.
+- Minimum 2CPU & 2GB Memory.
+- Swap memory should be disabled on the Virtual Machines.
+- Network connectivity among all machines in the cluster.
 
-### Preparing the hosts
-- WIP REQ ports for kubeadm
-- Install `Container` runtime
+## Preparing the hosts
 
-### Installing Container runtime
+### Ports and Protocols
+When running Kubernetes in an environment with strict network boundaries, such as on-premises datacenter with physical network firewalls or Virtual Networks in Public Cloud, it is useful to be aware of the ports and protocols used by Kubernetes components
+**Control plane**
+~~~
+Protocol	Direction	Port Range	Purpose	                 Used By
+TCP	      Inbound	  6443	      Kubernetes API server	   All
+TCP	      Inbound	  2379-2380	  etcd server client API	 kube-apiserver, etcd
+TCP	      Inbound	  10250	      Kubelet API	             Self, Control plane
+TCP	      Inbound	  10259	      kube-scheduler	         Self
+TCP	      Inbound	  10257	      kube-controller-manager	 Self
+~~~
+**Worker node(s)**
+~~~
+Protocol	Direction	Port Range	 Purpose	               Used By
+TCP	      Inbound	  10250	       Kubelet API	           Self, Control plane
+TCP	      Inbound	  10256	       kube-proxy	             Self, Load balancers
+TCP	      Inbound	  30000-32767	 NodePort Services†	     All
+~~~
+### Setup Steps
+- Installing Continer runtime [Docker]. 
+- Install `KUBEADM`,`KUBELET`,`KUBECTL`.
+- Initialize Control Plane.
+- Install POD-Network Add-on [CNI].
+- Join Worker Nodes.
+- Deploying an Application [Nginx].
+### Installing Container runtime [Docker]
+- Install Docker on Control Plane & Worker Nodes
 ~~~bash
 apt update
 ~~~
@@ -22,15 +47,16 @@ Once docker installed, Verify with using
 ~~~bash
 docker --version
 ~~~
-OutPut looks like
+**OutPut looks like**
 ~~~bash
 root@CP-1:~# docker --version
 Docker version 24.0.7, build 24.0.7-0ubuntu2~20.04.1
 ~~~
-### Installation of kubeadm, kubelet & kubectl
+### Installation of `kubeadm`, `kubelet` & `kubectl`.
 - `kubeadm`: the command to bootstrap the cluster.
 - `kubelet`: the component that runs on all of the machines in your cluster and does things like starting pods and containers.
 - `kubectl`: the command line util to talk to your cluster.
+
 Update the system
 ~~~bash
 sudo apt-get update
@@ -39,7 +65,7 @@ Install packages needed to use the Kubernetes apt repository
 ~~~bash
 sudo apt-get install -y apt-transport-https ca-certificates curl gpg
 ~~~
-Create a directory for keyrings
+Create a directory for keyrings, if not present.
 ~~~bash
 sudo mkdir -p -m 755 /etc/apt/keyrings
 ~~~
@@ -57,12 +83,12 @@ sudo apt-get update
 sudo apt-get install -y kubelet kubeadm kubectl
 sudo apt-mark hold kubelet kubeadm kubectl
 ~~~
-### Creating a cluster with kubeadm
-Initializing your control-plane node #can be perform on Cntrol Plane only.
+### Initialize Control Plane
+Initializing your control-plane node [Can be perform on Control Plane only]
 ~~~bash
 kubeadm init
 ~~~
-**OutPut looks like below**
+**OutPut should look something like**
 ~~~bash
 Your Kubernetes control-plane has initialized successfully!
 
@@ -86,6 +112,8 @@ kubeadm join 172.16.10.69:6443 --token er69y8.jliqf9p297ch7xpa \
         --discovery-token-ca-cert-hash sha256:1b80055e184f4b75e275145bfc7849c22b8cd1eab0d12946ce81f4147d07e8e7
 root@CP-1:~#
 ~~~
+- As the above output mentioned copy the token in your notepad, we will need to join worker/slave to the master node.
+
 To make kubectl work for your `non-root` user, run these commands
 ~~~bash
 mkdir -p $HOME/.kube
@@ -97,6 +125,7 @@ If you are the `root` user, you can run
 export KUBECONFIG=/etc/kubernetes/admin.conf
 ~~~
 ### Installing a Pod network add-on
+- Run it on Control Plane only.
 - You must deploy a Container Network Interface (CNI) based Pod network add-on so that your Pods can communicate with each other. 
 - Cluster DNS (CoreDNS) will not start up before a network is installed.
 Below are the list of some available add-ons for CNI.
@@ -180,17 +209,23 @@ root@CP-1:~# kubectl get nodes
 NAME   STATUS   ROLES           AGE   VERSION
 cp-1   Ready    control-plane   8h    v1.29.8
 ~~~
-**Note:-** As we add only one control plane, its showing one and we didn't add any workernodes.
+**Note:-** As we add only one control plane, its showing only one and we didn't add any workernodes.
+
 ### Adding Worker Nodes to the Cluster
 Execute the `kubead join` command on Worker Nodes to join with the cluster.
 - Token will be generated while initiatizing `kubeadm` on control plane.
+- Paste the Join command from the above kubeadm init output
 ~~~bash
 kubeadm join 172.16.10.69:6443 --token er69y8.jliqf9p297ch7xpa \
         --discovery-token-ca-cert-hash sha256:1b80055e184f4b75e275145bfc7849c22b8cd1eab0d12946ce81f4147d07e8e7
 ~~~
-Verify the `Nodes` on `Control Plane`
+Check the joined nodes 
 ~~~bash
 kubectl get nodes
+~~~
+or 
+~~~bash
+kubectl get nodes -o wide
 ~~~
 **OutPut should look something like:**
 ~~~bash
@@ -234,3 +269,4 @@ app1-6cf7b4979b-kpzxg   1/1     Running   0          4m46s
 app1-6cf7b4979b-ntpd2   1/1     Running   0          4m46s
 app1-6cf7b4979b-plksm   1/1     Running   0          4m46s
 ~~~
+# Thank You
