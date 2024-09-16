@@ -1,4 +1,4 @@
-# DePloyment stratagies in K8S
+# Deployment stratagies in K8S
 - Max surge
 - Max unavailable
 
