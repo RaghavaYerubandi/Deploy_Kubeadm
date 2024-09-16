@@ -7,4 +7,14 @@
 - SSL termination.
 - Can use single LoadBalancer instead of multiple.
 ## Ingress Controller
-- 
+- An Ingress Controller is a deamon, typically running as a kubernetes pod, that watches changes to ingress resources and configures the underlying loadbalancer accordingly.
+**Types of Ingress Controllers**
+- Nginx
+- HAproxy
+- Traefic
+- F5
+- Cloud specific controllers [AWS,AZURE,GCP]
+## Ingress Resources
+- An Ingress Resource is a K8S API object that manages external access to services within a cluster, typically http.
+- It provides a way to define how http/https traffic should be routed based on rules defined in the resource.
+- Using Ingress Resources we can redirect the traffic from http to https.
