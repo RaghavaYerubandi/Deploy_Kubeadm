@@ -1,0 +1,25 @@
+#### Deployment file with max surge
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: myapp
+  name: myapp
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: myapp
+  template:
+    metadata:
+      labels:
+        app: myapp
+    spec:
+      containers:
+      - image: nginx:latest
+        name: loginapp
+        resources: {}
+  strategy:
+   type: RollingUpdate
+   rollingUpdate:
+     maxSurge: 2
