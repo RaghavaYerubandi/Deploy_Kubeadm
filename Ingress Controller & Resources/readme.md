@@ -18,3 +18,19 @@
 - An Ingress Resource is a K8S API object that manages external access to services within a cluster, typically http.
 - It provides a way to define how http/https traffic should be routed based on rules defined in the resource.
 - Using Ingress Resources we can redirect the traffic from http to https.
+
+## Deploying an Nginx-ingress controller.
+
+~~~bash
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/cloud/deploy.yaml
+~~~
+
+**Verify the nginx controller**
+~~~bash
+kubectl get pods -n ingress-nginx
+~~~
+
+**Verify the ingress services**
+~~~bash
+kubectl get svc -n ingress-nginx
+~~~
