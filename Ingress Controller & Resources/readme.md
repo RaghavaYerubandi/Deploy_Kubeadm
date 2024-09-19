@@ -36,7 +36,22 @@ kubectl get pods -n ingress-nginx
 ~~~bash
 kubectl get svc -n ingress-nginx
 ~~~
+**OutPut was similar to**
+~~~bash
+root@ragh-k8s-control-191b22796c9:~# kubectl get svc -n ingress-nginx
+NAME                                 TYPE           CLUSTER-IP     EXTERNAL-IP     PORT(S)                      AGE
+ingress-nginx-controller             LoadBalancer   10.100.43.27   <External_IP>   80:31064/TCP,443:32397/TCP   2d1h
+ingress-nginx-controller-admission   ClusterIP      10.98.176.23   <none>          443/TCP                      2d1h
+root@ragh-k8s-control-191b22796c9:~#
+~~~
+
 **Verify the ingressClass**
 ~~~bash
 kubectl get ingressClass
+~~~
+**OutPut was similar to**
+~~~bash
+root@ragh-k8s-control-191b22796c9:~# ku get ingressClass
+NAME    CONTROLLER             PARAMETERS   AGE
+nginx   k8s.io/ingress-nginx   <none>       2d1h
 ~~~
