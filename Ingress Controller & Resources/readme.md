@@ -8,6 +8,7 @@
 - Can use single LoadBalancer instead of multiple.
 ## Ingress Controller
 - An Ingress Controller is a deamon, typically running as a kubernetes pod, that watches changes to ingress resources and configures the underlying loadbalancer accordingly.
+
 **Types of Ingress Controllers**
 - Nginx
 - HAProxy
