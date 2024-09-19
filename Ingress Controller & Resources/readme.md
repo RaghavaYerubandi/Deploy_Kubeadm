@@ -34,3 +34,7 @@ kubectl get pods -n ingress-nginx
 ~~~bash
 kubectl get svc -n ingress-nginx
 ~~~
+**Verify the ingressClass**
+~~~bash
+kubectl get ingressClass
+~~~
