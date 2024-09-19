@@ -10,9 +10,10 @@
 - An Ingress Controller is a deamon, typically running as a kubernetes pod, that watches changes to ingress resources and configures the underlying loadbalancer accordingly.
 **Types of Ingress Controllers**
 - Nginx
-- HAproxy
-- Traefic
+- HAProxy
+- Traefik
 - F5
+- Contour
 - Cloud specific controllers [AWS,AZURE,GCP]
 ## Ingress Resources
 - An Ingress Resource is a K8S API object that manages external access to services within a cluster, typically http.
