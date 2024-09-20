@@ -1,6 +1,6 @@
 # Probes in K8s
-- Probes are used to check the health of containers running in a pod.
-- They ensure that the applications are running smoothly and can automatically restart the pod, if it fails.
+- Probes are used to check the health of the containers running in a POD.
+- They ensure that the applications are running smoothly and can automatically restart the POD, if it fails.
 
 **Types of Probes**
 - Liveness Probe
