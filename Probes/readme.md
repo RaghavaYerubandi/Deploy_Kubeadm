@@ -8,7 +8,7 @@
 - Startup Probe
 
 ## Liveness Probe
-- Liveness probe will check health of te container running inside the POD is still alive or not.
+- Liveness probe will check health of the container running inside the POD is still alive or not.
 - Liveness probe can restart the POD.
 - Liveness Probe will check the health status of the POD using `http get`, `tcp socket`, `command`.
 
