@@ -1,6 +1,17 @@
 # Deployment stratagies in K8S
-- Max surge
-- Max unavailable
+- Deployment strategies define how updates to applications are rolled out to avoid downtime and ensure availability.
+- There are several deployment strategies available, each suited to different scenarios depending on your app's requirements for uptime, consistency, and the ability to handle traffic.
+
+## Types of Stratagies
+- Rolling Updates
+- Canary
+- Blue & Green
+
+## Rolling Updates
+
+Rolling Updates are default deployment strategy in K8s. Rolling updates has 2 types of stratagies.
+- Max Surge
+- Max Unavailable
 
 ## **Max Surge**
 - Max surge specifies the maximum no.of pods that can be created during an update.
