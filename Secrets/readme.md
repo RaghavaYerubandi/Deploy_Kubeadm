@@ -48,3 +48,5 @@ kubectl create secret docker-registry secret-tiger-docker \
   --docker-server=my-registry.example:5000
 ~~~
 
+## ServiceAccount token Secrets
+- It is used to store a token credential that identifies a ServiceAccount.
