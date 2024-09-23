@@ -11,8 +11,9 @@
 - Cluster role will work for cluster level.
 
 **Bindings**
-- Role Bindings
-- Cluster Bindings
+
+     - Role Bindings
+     - Cluster Bindings
 
 - Using permission, we can create access for the resources.
 - We need to bind roles to the users, so that the user have limited access.
