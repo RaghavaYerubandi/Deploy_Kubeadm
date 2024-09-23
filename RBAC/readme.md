@@ -4,6 +4,7 @@
 - RBAC uses `Roles` & `Role Bindings` to grant permission.
 
 **Permissions**
+
      - Role
      - Cluster Role
 - Role will work for specific namespaces.
@@ -16,5 +17,6 @@
 - Using permission, we can create access for the resources.
 - We need to bind roles to the users, so that the user have limited access.
 - Using `RBAC`, we provide access to the below objects.
+
       - Admins & Developers.
       - PODs Service accounts
