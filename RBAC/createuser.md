@@ -8,7 +8,7 @@ openssl genrsa -out user.key 2048
 openssl genrsa -out dev.key 2048
 Generating RSA private key, 2048 bit long modulus (2 primes)
 ................+++++
-................................................................................                                                  .....+++++
+....................................................................................+++++
 e is 65537 (0x010001)
 ~~~
 ## Creating csr for user
