@@ -53,3 +53,25 @@ CreationTimestamp:  Mon, 02 Sep 2024 09:55:53 +0000
 Taints:             <none>
 Unschedulable:      false
 ~~~
+- We can select the label and mention in the deployment file, so that the POD will schedule on the same node as per `labels`.
+- We can also create custom labels and add to the nodes as well.
+~~~bash
+kubectl label node <node_name> <label_key>=<label_value>
+~~~
+~~~bash
+kubectl label node ragh-k8s-node-191b227fedd high-memory=yes
+~~~
+- Assumng that node `ragh-k8s-node-191b227fedd` has high memory performance.
+
+**Verify the labels**
+~~~bash
+kubectl get nodes ragh-k8s-node-191b227fedd --show-labels
+~~~
+**OutPut looks similar to this**
+
+~~~bash
+root@ragh-k8s-control-191b22796c9:~# ku get nodes ragh-k8s-node-191b227fedd --show-labels
+NAME                        STATUS   ROLES    AGE   VERSION   LABELS
+ragh-k8s-node-191b227fedd   Ready    worker   24d   v1.28.4   beta.kubernetes.io/arch=amd64,beta.kubernetes.io/os=linux,high-memory=yes,kubernetes.io/arch=amd64,kubernetes.io/hostname=ragh-k8s-node-191b227fedd,kubernetes.io/os=linux,node-role.kubernetes.io/worker=true
+~~~
+- Using Nodeselctor we can't deploy using multiple labels or node selector.
