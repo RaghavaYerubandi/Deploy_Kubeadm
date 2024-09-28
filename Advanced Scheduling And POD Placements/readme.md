@@ -112,3 +112,18 @@ kubectl label node ragh-k8s-node-191b227fedd env=dev application=webapp
 
 ### Node Anti-Affinity
 - Node Anti-Affinity in Kubernetes is a mechanism that allows you to influence the scheduling of Pods by ensuring that they do not run on specific nodes or are distributed across different nodes.
+
+### POD Affinity
+- POD affinity and Anti-affinity are advanced sceduling features that allows us to control how pods are placed relative to other pods.
+- POD affinity allows us to define rules for placing a POD on the same node.
+- This is useful when you want to group related PODS together to improve performance.
+
+![image](https://github.com/user-attachments/assets/100e3e33-78a6-4e97-9c36-ceefea3f6b33)
+
+- As per above diagram , when the POD affinity enables, both `APP-POD` & `DB-POD` will place on the same node.
+- So that it can communicate easily.
+- It improves performance, reduce latency, etc.
+
+### POD Anti-Affinity
+- Pod anti-affinity ensures that a POD is not scheduled on the same node.
+- This can help in improving `fault-tolerance` by spreading out replicas of a service across different nodes.
