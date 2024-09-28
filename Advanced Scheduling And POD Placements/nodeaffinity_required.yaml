@@ -2,17 +2,17 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: nodeaffinity
-  name: nodeaffinity
+    app: nodeaffinity-required
+  name: nodeaffinity-required
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: nodeaffinity
+      app: nodeaffinity-required
   template:
     metadata:
       labels:
-        app: nodeaffinity
+        app: nodeaffinity-required
     spec:
       affinity:
         nodeAffinity:
