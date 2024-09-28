@@ -127,3 +127,37 @@ kubectl label node ragh-k8s-node-191b227fedd env=dev application=webapp
 ### POD Anti-Affinity
 - Pod anti-affinity ensures that a POD is not scheduled on the same node.
 - This can help in improving `fault-tolerance` by spreading out replicas of a service across different nodes.
+
+## Taints and Tolerations
+- Taints and Tolerations also a mechanism used to control scheduling the PODs on worker nodes.
+- They both work together to ensure that pods are not placed on inappropriate nodes, allowing more control over pod placement.
+
+### Taints
+- A `Taint` is a key-value pair that you apply to a node to mark it as having a special property.
+- Taints will apply at node level in simple terms.
+**Taint Effects**
+- NoSchedule
+- NoExecute
+- PreferNoSchedule
+
+**NoSchedule**
+- PODS that do not tolerate the taint are not scheduled on the POD.
+- There will be no effect for existing PODS.Existing PODs will be running.
+
+**NoExecute**
+- PODs that do not tolerate the taint are not scheduled on the node, and if they are already running they are evicted
+
+**PrefNoschedule**
+- K8s tries to avoid scheduling PODs that do not tolerate the taint on the node, but it is not guaranteed.
+
+~~~bash
+kubectl taint node <node_name> <key_pair>=<value>:<taint_effect>
+~~~
+
+### Tolerations
+-  Tolerations are applied to a POD to allow it to be scheduled on a node that has a matching taint.
+- In simple terms Tolertions will apply at POD level.
+**Toleration Effects**
+- NoSchedule
+- NoExecute
+- PreferNoSchedule
