@@ -74,4 +74,39 @@ root@ragh-k8s-control-191b22796c9:~# ku get nodes ragh-k8s-node-191b227fedd --sh
 NAME                        STATUS   ROLES    AGE   VERSION   LABELS
 ragh-k8s-node-191b227fedd   Ready    worker   24d   v1.28.4   beta.kubernetes.io/arch=amd64,beta.kubernetes.io/os=linux,high-memory=yes,kubernetes.io/arch=amd64,kubernetes.io/hostname=ragh-k8s-node-191b227fedd,kubernetes.io/os=linux,node-role.kubernetes.io/worker=true
 ~~~
+
+**Removing labels for node**
+~~~bash
+kubectl label node <node_name> <label_key> -
+~~~
+**OutPut looks similar to this**
+~~~bash
+root@ragh-k8s-control-191b22796c9:~# ku label node ragh-k8s-node-191b227fedd high-memory-
+node/ragh-k8s-node-191b227fedd unlabeled
+~~~
 - Using Nodeselctor we can't deploy using multiple labels or node selector.
+
+## Affinity and Anti-Affinity
+- Affinity & Anti-affinity rules allow more comples rules compared to NodeSelector.
+- We can define more labels in this type.
+- There are 2 types.
+   - Node Affinity and Anti-Affinity
+   - Pod Affinity and Anti-Affinity
+
+### Node Affinity
+- It determines on which nodes a POD should be placed.
+- We can use multiple labels.
+- Based on below selectors, Node affinity will work.
+    - requiredDuringSchedulingIgnoredDuringExecution
+    - preferredDuringSchedulingIgnoredDuringExecution
+- While deploying with `requiredDuringSchedulingIgnoredDuringExecution` the Pods will deploy on the nodes based on `selectors` & `labels`.
+- Here if more PODs are running on the same nodes based on `selectors` & `labels`. The newly created pods will be in `Pending state` as there is no resources on the nodes.
+  
+- While deploying with `preferredDuringSchedulingIgnoredDuringExecution` Pods will deploy on the nodes based on `weights` & `labels`.
+- Here if more PODs are running on the same nodes based on `weights` & `labels`. The newly created pods will be scheduled on the other node.
+
+**Creating a Labels**
+~~~bash
+kubectl label node ragh-k8s-node-191b227fedd env=dev application=webapp
+~~~
+
