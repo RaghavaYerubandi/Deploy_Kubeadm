@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: nodeaffinity-preffered
+  name: nodeaffinity-preffered
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nodeaffinity-preffered
+  template:
+    metadata:
+      labels:
+        app: nodeaffinity-preffered
+    spec:
+      affinity:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 50
+            preference:
+              matchExpressions:
+              - key: env
+                operator: In
+                values:
+                - dev
+          - weight: 40
+            preference:
+              matchExpressions:
+              - key: application
+                operator: In
+                values:
+                - webapp
+      containers:
+      - image: captain7141/app1:v1.0
+        name: nodeaffinity-preffered
