@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: nsapp
+  name: nsapp
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nsapp
+  template:
+    metadata:
+      labels:
+        app: nsapp
+    spec:
+      containers:
+      - image: captain7141/app1:v1.0
+        name: nsapp
+      nodeSelector:
+        high-memory: "yes"
