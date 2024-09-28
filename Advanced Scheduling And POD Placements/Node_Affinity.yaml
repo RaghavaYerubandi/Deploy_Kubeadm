@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: nodeaffinity
+  name: nodeaffinity
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nodeaffinity
+  template:
+    metadata:
+      labels:
+        app: nodeaffinity
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: env
+                operator: In
+                values:
+                - dev
+              - key: application
+                operator: In
+                values:
+                - webapp
+      containers:
+      - image: captain7141/app1:v1.0
+        name: nodeaffinity
