@@ -110,3 +110,5 @@ node/ragh-k8s-node-191b227fedd unlabeled
 kubectl label node ragh-k8s-node-191b227fedd env=dev application=webapp
 ~~~
 
+### Node Anti-Affinity
+- Node Anti-Affinity in Kubernetes is a mechanism that allows you to influence the scheduling of Pods by ensuring that they do not run on specific nodes or are distributed across different nodes.
