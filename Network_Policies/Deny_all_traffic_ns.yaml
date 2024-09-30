@@ -1,0 +1,11 @@
+# Deny both Ingress & Egress traffic in a Namespace
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: deny-all-traffic-devp
+  namespace: development
+spec:
+  podSelector: {}
+  policyTypes:
+  - Ingress
+  - Egress
