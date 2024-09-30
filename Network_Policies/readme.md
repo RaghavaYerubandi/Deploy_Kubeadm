@@ -4,3 +4,7 @@
 - This can be used for shared cluster.
 - Using Network Policies, we can allow `Ingress` & `Egress` traffic based on port numbers.
 - We can block the `Ingress` & `Egress` traffic as well.
+
+~~~bash
+kubectl get networkpolicies.networking.k8s.io
+~~~
