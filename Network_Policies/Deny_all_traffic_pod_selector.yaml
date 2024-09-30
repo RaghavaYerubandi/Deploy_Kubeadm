@@ -1,0 +1,13 @@
+# Deny both Ingress & Egress traffic in a Namespace using pod selctor
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: deny-ingress-egress
+  namespace: default
+spec:
+  podSelector: 
+    matchLabels:
+      run: np
+  policyTypes:
+  - Ingress
+  - Egress
