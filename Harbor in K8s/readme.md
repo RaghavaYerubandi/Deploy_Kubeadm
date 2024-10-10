@@ -82,6 +82,7 @@ my-harbor-registry     ClusterIP   10.105.89.134    <none>        5000/TCP,8080/
 my-harbor-trivy        ClusterIP   10.105.161.218   <none>        8080/TCP            5m56s
 ~~~
 ### Creating a Harbour Ingress
+- Create a ingress resource in harbor namespace only.
 ~~~yaml
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -114,4 +115,4 @@ NAME             CLASS   HOSTS                          ADDRESS         PORTS   
 harbor-ingress   nginx   harbor.ragh.xyz                45.249.241.12   80, 443   61s
 ~~~
 
-- Add A name record to it.
+- Add A name record the DNS.
