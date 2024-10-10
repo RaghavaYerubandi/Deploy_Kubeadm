@@ -81,4 +81,37 @@ my-harbor-redis        ClusterIP   10.96.199.11     <none>        6379/TCP      
 my-harbor-registry     ClusterIP   10.105.89.134    <none>        5000/TCP,8080/TCP   5m56s
 my-harbor-trivy        ClusterIP   10.105.161.218   <none>        8080/TCP            5m56s
 ~~~
+### Creating a Harbour Ingress
+~~~yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: harbor-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+spec:
+  ingressClassName: "nginx"
+  tls:
+  - hosts:
+    - "myapp.ragh.xyz"
+    secretName: tls-secret
+  rules:
+  - host: harbor.ragh.xyz
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: my-harbor-portal
+            port:
+              number: 80
+~~~
+**Verify Harbor ingress**
+~~~bash
+root@ragh-k8s-control-191b22796c9:~# ku get ingress
+NAME             CLASS   HOSTS                          ADDRESS         PORTS     AGE
+harbor-ingress   nginx   harbor.ragh.xyz                45.249.241.12   80, 443   61s
+~~~
 
+- Add A name record to it.
