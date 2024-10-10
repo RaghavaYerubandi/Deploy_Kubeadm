@@ -94,7 +94,7 @@ spec:
   ingressClassName: "nginx"
   tls:
   - hosts:
-    - "myapp.ragh.xyz"
+    - "harbor.ragh.xyz"
     secretName: tls-secret
   rules:
   - host: harbor.ragh.xyz
