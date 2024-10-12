@@ -61,3 +61,6 @@ root@ragh-k8s-control-191b22796c9:~# ku get storageclasses.storage.k8s.io
 NAME                 PROVISIONER          RECLAIMPOLICY   VOLUMEBINDINGMODE   ALLOWVOLUMEEXPANSION   AGE
 nfs-sc-file-system   nfs-pn-file-system   Delete          Immediate           true                   9m28s
 ~~~
+
+**Note**
+- PVC must be create for individual namespaces
