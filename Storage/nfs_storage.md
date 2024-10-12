@@ -1,6 +1,5 @@
 # Adding nfs_storage to K8s cluster.
 
-**Step-1**
 - Create a nfs server.
 ~~~bash
 sudo apt update
