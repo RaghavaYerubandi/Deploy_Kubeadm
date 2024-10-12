@@ -2,8 +2,8 @@
 
 - Create a nfs server.
 ~~~bash
-sudo apt update
-sudo apt install nfs-kernel-server
+apt update
+apt install nfs-kernel-server
 ~~~
 - Create a directory for storage.
 ~~~bash
