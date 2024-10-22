@@ -26,4 +26,33 @@ spec:
       storage: 1Gi
   storageClassName: nfs-sc-file-system
 ~~~
-
+**Define a POD with PVC**
+~~~yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: testpod
+  name: testpod
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: testpod
+  template:
+    metadata:
+      labels:
+        app: testpod
+    spec:
+      containers:
+      - image: captain7141/testimage:v2
+        name: testimage
+        resources: {}
+        volumeMounts:
+        - mountPath: /data
+          name: nfs-storage
+      volumes:
+      - name: nfs-storage
+        persistentVolumeClaim:
+          claimName: nfs-pvc
+~~~
