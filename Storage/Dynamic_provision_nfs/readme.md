@@ -5,7 +5,7 @@
 
 **NOTE:-** PVC shloud be mentioned in POD defination.
 **Steps**
-- Create a Storage Class
+- [Create a Storage Class](https://github.com/RaghavaYerubandi/Deploy_Kubeadm/blob/main/Storage/nfs_storage.md#install-nfs-using-helm)
 - Create a PVC
 - Create a POD with PVC defined.
 
