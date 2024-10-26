@@ -1,3 +1,10 @@
 # Storage
-- Storage in k8s is a critical aspect for stateful applications.
-- Kubernetes provides multiple mechanisms to manage storage, ensuring that data persists even when pods are rescheduled or replaced.
+- Storage in k8s is a critical aspect for stateful applications, where data need to persist when the POD restarts.
+- Kubernetes provides multiple mechanisms to manage storage.
+
+## CSI
+
+
+## Types of Provisioners in K8s
+- Static
+- Dynamic
