@@ -24,7 +24,7 @@ exportfs -rav
 systemctl restart nfs-kernel-server
 ~~~
 
-## Install nfs using helm
+## Install nfs  provisioner using helm on Control node
 - Add the Helm repository for the NFS Subdir External Provisioner.
 ~~~bash
 helm repo add nfs-subdir-external-provisioner https://kubernetes-sigs.github.io/nfs-subdir-external-provisioner/
