@@ -3,8 +3,13 @@
 - Kubernetes provides multiple mechanisms to manage storage.
 
 ## CSI
+- WIP
 
 
 ## Types of Provisioners in K8s
 - Static
 - Dynamic
+
+
+
+WIP
