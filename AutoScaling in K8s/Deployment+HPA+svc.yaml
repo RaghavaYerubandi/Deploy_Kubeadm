@@ -2,19 +2,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: hpatest
+  name: deploy-hpa
 spec:
   selector:
     matchLabels:
-      run: hpatest
+      run: deploy-hpa
   replicas: 1
   template:
     metadata:
       labels:
-        run: hpatest
+        run: deploy-hpa
     spec:
       containers:
-      - name: hpatest
+      - name: deploy-hpa
         image: captain7141/app1:v1.0
         ports:
         - containerPort: 80
@@ -25,25 +25,24 @@ spec:
           requests:
             cpu: 100m
             memory: "100Mi"
-
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: hpatest
+  name: deploy-hpa
   labels:
-    run: hpatest
+    run: deploy-hpa
 spec:
   ports:
   - port: 80
   selector:
-    run: hpatest
+    run: deploy-hpa
 
 ---
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
-  name: hpatest
+  name: deploy-hpa
 spec:
   behavior:
     scaleDown:
@@ -53,7 +52,7 @@ spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: hpatest
+    name: deploy-hpa
   metrics:
   - type: Resource
     resource:
