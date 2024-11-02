@@ -29,6 +29,6 @@ kubectl get hpa
 **OutPut**
 ~~~bash
 root@ragh-k8s-control-191b22796c9:~/HPA# ku get hpa
-NAME         REFERENCE               TARGETS                        MINPODS   MAXPODS   REPLICAS   AGE
-deploy-hpa   Deployment/deploy-hpa   2%/50%, 3%/50%   1         10        1          52s
+NAME         REFERENCE               TARGETS             MINPODS   MAXPODS   REPLICAS    AGE
+deploy-hpa   Deployment/deploy-hpa   2%/50%, 3%/50%       1         10        1          52s
 ~~~
