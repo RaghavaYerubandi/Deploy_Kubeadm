@@ -41,3 +41,17 @@ instal prometheus uisng helm
 helm install prometheus prometheus-community/kube-prometheus-stack -n mon
 ~~~
 
+**Verify Pods**
+~~~bash
+root@ragh-k8s-control-191b22796c9:~# ku get pods
+NAME                                                     READY   STATUS    RESTARTS   AGE
+alertmanager-prometheus-kube-prometheus-alertmanager-0   2/2     Running   0          5m4s
+prometheus-grafana-c9bc9b494-j6hfn                       3/3     Running   0          6m2s
+prometheus-kube-prometheus-operator-6b4895c77d-htbnm     1/1     Running   0          6m2s
+prometheus-kube-state-metrics-7bd877f74d-hnm5s           1/1     Running   0          6m2s
+prometheus-prometheus-kube-prometheus-prometheus-0       2/2     Running   0          5m4s
+prometheus-prometheus-node-exporter-ctnzl                1/1     Running   0          6m2s
+prometheus-prometheus-node-exporter-vxc5m                1/1     Running   0          6m2s
+prometheus-prometheus-node-exporter-wpjcl                1/1     Running   0          6m2s
+~~~
+
