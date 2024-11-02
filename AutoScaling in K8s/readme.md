@@ -25,3 +25,10 @@
 kubectl get hpa
 ~~~
 - The above command will shows hpa, if configured.
+
+**OutPut**
+~~~bash
+root@ragh-k8s-control-191b22796c9:~/HPA# ku get hpa
+NAME         REFERENCE               TARGETS                        MINPODS   MAXPODS   REPLICAS   AGE
+deploy-hpa   Deployment/deploy-hpa   <unknown>/50%, <unknown>/50%   1         10        1          52s
+~~~
