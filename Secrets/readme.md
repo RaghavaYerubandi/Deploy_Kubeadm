@@ -23,7 +23,10 @@ Kubectl get secret
 ~~~bash
 kubectl create secret tls my-tls-secret --cert=path/to/cert/file --key=path/to/key/file
 ~~~
-
+**Example**
+~~~bash
+kubectl create secret tls my-new-tls-secret --cert=fullchain.pem --key=privkey.pem
+~~~
 ## Opaque Secrets
 - This is the default secrets in kubernets.
 - We can store `Passwords`, `API-keys`, etc.
